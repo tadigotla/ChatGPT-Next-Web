@@ -1,13 +1,15 @@
 version: '3.8'
 
 services:
-  promtail:
+  chatserver:
     image: chat-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: chatserver
     hostname: chatserver
-    environment:
-      - CODE=
-      - OPENAI_API_KEY=xxx
+    env_file:
+      - .env.local
     ports:
       - 3000:3000
     command: 'node server.js'
